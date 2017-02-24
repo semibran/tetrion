@@ -1,0 +1,17 @@
+{
+  "name": "tetrion",
+  "version": "0.0.0",
+  "description": "Simple isomorphic Tetris game engine",
+  "license": "MIT",
+  "author": "Brandon Semilla <semibran@gmail.com>",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/semibran/tetrion.git"
+  },
+  "dependencies": {
+    "bag": "github:semibran/bag",
+    "grid": "github:semibran/grid",
+    "tetromino": "github:semibran/tetromino"
+  }
+}

@@ -1,2 +1,7 @@
 # tetrion
-Simple isomorphic Tetris game engine
+> Simple isomorphic Tetris game engine
+
+WIP
+
+## License
+MIT
