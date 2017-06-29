@@ -1,6 +1,6 @@
-var move = require('../../piece/actions/move')
+var piece = require('../../piece')
 
-module.exports = function (game, direction)  {
+module.exports = function move(game, direction)  {
   if (!game.piece) return false
   var delta = null
   if (direction === 'left') {
@@ -12,5 +12,5 @@ module.exports = function (game, direction)  {
   } else {
     return false
   }
-  return move(game.piece, delta, game.matrix)
+  return piece.actions.move(game.piece, delta, game.matrix)
 }

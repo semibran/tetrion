@@ -1,6 +1,6 @@
-var rotate = require('../../piece/actions/rotate')
+var piece = require('../../piece')
 
-module.exports = function (game, direction) {
+module.exports = function rotate(game, direction) {
   if (!game.piece) return false
   if (direction === 'left') {
     delta = -1
@@ -9,5 +9,5 @@ module.exports = function (game, direction) {
   } else {
     return false
   }
-  return rotate(game.piece, delta, game.matrix)
+  return piece.actions.rotate(game.piece, delta, game.matrix)
 }
