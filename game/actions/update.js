@@ -1,4 +1,4 @@
-var move = require('../../piece/actions/move')
+var move = require('./move')
 var types = require('../../piece/types')
 var manifest = require('../../piece/manifest')
 var contains = require('../../matrix/contains')
@@ -12,7 +12,7 @@ module.exports = function update(game) {
     game.steps += game.gravity
     while (game.steps >= 1) {
       game.steps--
-      if (!move(game.piece, 'down', game.matrix)) {
+      if (!move(game, 'down')) {
         var blocks = manifest(game.piece)
         game.matrix.pieces.push(blocks)
         game.piece = null
