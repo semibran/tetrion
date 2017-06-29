@@ -1,6 +1,6 @@
 var manifest = require('../manifest')
 var contains = require('../../matrix/contains')
-var occupied = require('../../matrix/occupied')
+var occupant = require('../../matrix/occupant')
 
 module.exports = function move(piece, delta, matrix) {
   var position = piece.position
@@ -10,7 +10,7 @@ module.exports = function move(piece, delta, matrix) {
   var cells = manifest(piece)
   for (var i = cells.length; i--;) {
     var cell = cells[i]
-    if (!contains(matrix, cell) || occupied(matrix, cell)) {
+    if (!contains(matrix, cell) || occupant(matrix, cell)) {
       for (var j = position.length; j--;) {
         position[j] -= (delta[j] || 0)
       }

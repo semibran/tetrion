@@ -2,8 +2,7 @@ var move = require('./move')
 var types = require('../../piece/types')
 var manifest = require('../../piece/manifest')
 var contains = require('../../matrix/contains')
-var occupied = require('../../matrix/occupied')
-var collapse = require('../../matrix/actions/collapse')
+var occupant = require('../../matrix/occupant')
 var clear = require('../../matrix/actions/clear')
 
 module.exports = function update(game) {
@@ -22,7 +21,7 @@ module.exports = function update(game) {
           var block = blocks[i]
           var y = block[1]
           if (lines.indexOf(y) === -1) {
-            lines.push(y)
+            lines.unshift(y)
           }
         }
 
@@ -31,7 +30,7 @@ module.exports = function update(game) {
           var cell = [0, y]
           for (var x = game.matrix.size[0]; x--;) {
             cell[0] = x
-            if (!occupied(game.matrix, cell)) {
+            if (!occupant(game.matrix, cell)) {
               lines.splice(i, 1)
               break
             }
@@ -39,11 +38,26 @@ module.exports = function update(game) {
         }
 
         if (lines.length) {
-          for (var i = lines.length; i--;) {
-            var y = lines[i]
-            clear(game.matrix, y)
+          for (var y = lines[lines.length - 1] + 1; y--;) {
+            if (lines.indexOf(y) !== -1) {
+              clear(game.matrix, y)
+            }
           }
-          collapse(game.matrix)
+          var pieces = game.matrix.pieces
+          for (var i = pieces.length; i--;) {
+            var blocks = pieces[i]
+            for (var j = blocks.length; j--;) {
+              var block = blocks[j]
+              var distance = 0
+              for (var k = lines.length; k--;) {
+                var y = lines[k]
+                if (block[1] < y) {
+                  distance++
+                }
+              }
+              block[1] += distance
+            }
+          }
         }
       }
     }
@@ -56,7 +70,7 @@ module.exports = function update(game) {
     var cells = manifest(piece)
     for (var i = cells.length; i--;) {
       var cell = cells[i]
-      if (!contains(game.matrix, cell) || occupied(game.matrix, cell)) {
+      if (!contains(game.matrix, cell) || occupant(game.matrix, cell)) {
         break
       }
     }

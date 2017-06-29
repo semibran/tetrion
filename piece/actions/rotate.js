@@ -1,7 +1,7 @@
 var states = require('../states')
 var manifest = require('../manifest')
 var contains = require('../../matrix/contains')
-var occupied = require('../../matrix/occupied')
+var occupant = require('../../matrix/occupant')
 
 module.exports = function rotate(piece, delta, matrix) {
   var prev = piece.rotation
@@ -18,7 +18,7 @@ module.exports = function rotate(piece, delta, matrix) {
   var cells = manifest(piece)
   for (var i = cells.length; i--;) {
     var cell = cells[i]
-    if (!contains(matrix, cell) || occupied(matrix, cell)) {
+    if (!contains(matrix, cell) || occupant(matrix, cell)) {
       piece.rotation = prev
       return false
     }
