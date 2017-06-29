@@ -1,6 +1,6 @@
 {
  "name": "tetrion",
- "version": "0.1.0",
+ "version": "0.0.0",
  "description": "Tetris game engine",
  "keywords": ["tetrion", "tetris", "game", "engine"],
  "files": ["index.js", "game", "matrix", "piece"],
