@@ -45,11 +45,10 @@ We can modify the game state using utility functions called "actions". Let's beg
   },
   matrix: {
     actions: {
-      clear: [Function: clear],
-      collapse: [Function: collapse]
+      clear: [Function: clear]
     },
     contains: [Function: contains],
-    occupied: [Function: occupied]
+    occupant: [Function: occupant]
   },
   piece: {
     actions: {
@@ -93,9 +92,6 @@ Updates the game state by handling gravity, line clearing, piece spawning, and t
 ### `matrix.actions.clear(matrix, line?)`
 Clears all blocks at the `y`-position denoted by `line`, or the entirety of `matrix` if not provided.
 
-### `matrix.actions.collapse(matrix)`
-Collapses all empty lines found inside `matrix` by moving down pieces to fill their places, i.e. [naive gravity](http://tetris.wikia.com/wiki/Line_clear#Naive).
-
 ### `matrix.contains(matrix, cell)`
 Determines whether or not the given `[x, y]` pair lies inside `matrix`.
 ```js
@@ -111,8 +107,8 @@ true
 false
 ```
 
-### `matrix.occupied(matrix, cell)`
-Determines whether or not the given `[x, y]` pair is occupied by a piece.
+### `matrix.occupant(matrix, cell)`
+Finds the piece (list of `[x, y]` pairs) occupying the given `cell` inside `matrix` if it exists, otherwise `undefined`.
 
 ### `piece.actions.move(piece, delta, matrix)`
 Moves the specified `piece` by `delta` and returns `true` if successful, otherwise `false`.
