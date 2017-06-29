@@ -8,7 +8,7 @@ var keys = {}
 var game = {
   over: false,
   steps: 0,
-  gravity: 1 / 8,
+  gravity: 1 / 10,
   piece: null,
   matrix: {
     size: [10, 22],
@@ -47,18 +47,22 @@ function input(keys) {
     paused = !paused
   }
   if (!paused) {
-    if (buffered(keys.ArrowLeft) && !keys.ArrowRight) {
-      move(game, 'left')
-    } else if (buffered(keys.ArrowRight) && !keys.ArrowLeft) {
-      move(game, 'right')
-    }
-    if (keys.ArrowDown % 2 === 1 && piece === game.piece) {
-      move(game, 'down')
-    } else if (!keys.ArrowDown) {
-      piece = game.piece
-    }
-    if (keys.ArrowUp === 1) {
-      rotate(game, 'right')
+    if (piece === game.piece) {
+      if (buffered(keys.ArrowLeft) && !keys.ArrowRight) {
+        move(game, 'left')
+      } else if (buffered(keys.ArrowRight) && !keys.ArrowLeft) {
+        move(game, 'right')
+      }
+      if (keys.ArrowDown % 2 === 1) {
+        move(game, 'down')
+      }
+      if (keys.ArrowUp === 1) {
+        rotate(game, 'right')
+      }
+    } else {
+      if (!keys.ArrowLeft && !keys.ArrowRight && !keys.ArrowDown) {
+        piece = game.piece
+      }
     }
   }
 }
